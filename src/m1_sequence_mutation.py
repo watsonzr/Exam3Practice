@@ -90,10 +90,10 @@ def zero_changer(tuple_of_lists):
 
     count = 1
     for i in range(len(tuple_of_lists)):
-        list = tuple_of_lists[i]
-        for j in range(len(list)):
-            if list[j] == 0:
-                list[j] = count
+        list_i = tuple_of_lists[i]
+        for j in range(len(list_i)):
+            if list_i[j] == 0:
+                list_i[j] = count
                 count = count + 1
 
 
