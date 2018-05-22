@@ -5,8 +5,10 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in 2D GRAPHICS problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zack Watson.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+
+import math
 
 ########################################################################
 # Students:
@@ -89,7 +91,7 @@ def hourglass(window, n, point, radius, color):
     a color that rosegraphics understands.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -101,6 +103,33 @@ def hourglass(window, n, point, radius, color):
     #    DIFFICULTY:      8
     #    TIME ESTIMATE:  25 minutes (warning: this problem is challenging)
     # ------------------------------------------------------------------
+
+    x_val = point.x
+    y_val = point.y
+    for i in range(n):
+        for j in range(i + 1):
+            circle = rg.Circle(rg.Point(x_val, y_val), radius)
+            circle.fill_color = color
+            circle.attach_to(window)
+            line = rg.Line(rg.Point(x_val + radius, y_val), rg.Point(x_val - radius, y_val))
+            line.attach_to(window)
+            window.render()
+            x_val = x_val + (2 * radius)
+        y_val = y_val + (math.sqrt(3) * radius)
+        x_val = x_val - ((i + 1) * (2 * radius)) - radius
+    x_val = point.x
+    y_val = point.y
+    for i in range(n):
+        for j in range(i + 1):
+            circle = rg.Circle(rg.Point(x_val, y_val), radius)
+            circle.fill_color = color
+            circle.attach_to(window)
+            line = rg.Line(rg.Point(x_val + radius, y_val), rg.Point(x_val - radius, y_val))
+            line.attach_to(window)
+            window.render()
+            x_val = x_val + (2 * radius)
+        y_val = y_val - (math.sqrt(3) * radius)
+        x_val = x_val - ((i + 1) * (2 * radius)) - radius
 
 
 def run_test_many_hourglasses():
@@ -163,7 +192,7 @@ def many_hourglasses(window, square, m, colors):
     each of which denotes a color that rosegraphics understands.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -179,6 +208,28 @@ def many_hourglasses(window, square, m, colors):
     #                         a correct "hourglass" function above)
     #    TIME ESTIMATE:  20 minutes (warning: this problem is challenging)
     # ------------------------------------------------------------------
+
+    x_cent = square.center.x
+    y_cent = square.center.y
+    side = square.length_of_each_side
+    x_val_1 = x_cent - (side / 2)
+    x_val_2 = x_cent + (side / 2)
+    y_val_1 = y_cent - (side / 2)
+    y_val_2 = y_cent + (side / 2)
+    j = 0
+    for i in range(m):
+        rect = rg.Rectangle(rg.Point(x_val_1, y_val_1), rg.Point(x_val_2, y_val_2))
+        rect.attach_to(window)
+        window.render()
+        hourglass(window, i + 1, rg.Point(x_cent, y_cent), side / 2, colors[j])
+        x_cent = x_cent + ((i + 1.5) * side)
+        x_val_1 = x_val_1 + ((i + 1) * side)
+        x_val_2 = x_val_2 + ((i + 2) * side)
+        y_val_1 = y_val_1 - (math.sqrt(3) * (side / 2))
+        y_val_2 = y_val_2 + (math.sqrt(3) * (side / 2))
+        j = j + 1
+        if j == len(colors):
+            j = 0
 
 
 # ----------------------------------------------------------------------
