@@ -259,6 +259,7 @@ def big_letters(sequence_of_sequences):
                     answer = answer + letter
     return answer
 
+
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
