@@ -5,8 +5,10 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in SEQUENCES-OF-SUBSEQUENCES problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Zack Watson.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+
+import math
 
 ########################################################################
 # Students:
@@ -38,7 +40,7 @@ def main():
 def run_test_integers():
     """ Tests the    integers    function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  integers  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     #
@@ -67,6 +69,18 @@ def run_test_integers():
                        ['oops'],
                        [[55], [44]],
                        [30, -4]
+                       ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
+    # Test 2:
+    expected = [-14, 42, 77, 99, 11, 55, 38, 75, -1111]
+    answer = integers([(-14, 2.5, math.inf),
+                       [42],
+                       (77, 'Zack', 'Watson'),
+                       [7.7, 8.8, 99],
+                       (11, 55),
+                       [math.sin(math.pi), 7.5, 38, 75, 9.923, -1111]
                        ])
     print('Expected is:', expected)
     print('Actual is:  ', answer)
@@ -119,6 +133,14 @@ def integers(sequence_of_sequences):
     #    TIME ESTIMATE:  10 minutes.
     # ------------------------------------------------------------------
 
+    answer = []
+    for i in range(len(sequence_of_sequences)):
+        sequence = sequence_of_sequences[i]
+        for j in range(len(sequence)):
+            if type(sequence[j]) is int:
+                answer = answer + [sequence[j]]
+    return answer
+
 
 def run_test_big_letters():
     """ Tests the    big_letters    function. """
@@ -155,6 +177,21 @@ def run_test_big_letters():
                           'OoPs'  # OP
                           'D',  # D
                           'OOps'  # OO
+                          ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
+    # Test 2:
+    expected = 'BLILTESZWCTHWFFF'
+    answer = big_letters(['Big Letters',
+                          ['BIGGERLETTERS'],
+                          'small letters',
+                          'bIg LeTtErS',
+                          'Zack Watson',
+                          'Callan Taylor',
+                          'Hello World',
+                          '42 27 Fight Fight Fight',
+                          ('Hello', 'to', 'you')
                           ])
     print('Expected is:', expected)
     print('Actual is:  ', answer)
@@ -211,6 +248,16 @@ def big_letters(sequence_of_sequences):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:  12 minutes.
     # ------------------------------------------------------------------
+
+    answer = ''
+    for i in range(len(sequence_of_sequences)):
+        sequence = sequence_of_sequences[i]
+        if type(sequence) is str:
+            for j in range(len(sequence)):
+                letter = sequence[j]
+                if letter.isupper():
+                    answer = answer + letter
+    return answer
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
